@@ -1,0 +1,104 @@
+<ion-content>
+  <div class="container">
+    <div *ngIf="isPlaying <= 0">
+      <br>
+      <h5>Bienvenido al juego de multiplos del <b>Siete</b>!</h5>
+      <div>
+        <strong>Normal</strong>
+        <ion-toggle style="padding-bottom: 5px;" color="danger" [(ngModel)]="type" (ionChange)="typeChange()">
+
+        </ion-toggle>
+        <strong style="color: red;">
+          Experto
+        </strong>
+
+      </div>
+
+      <br>
+
+      <ion-button (click)="startGame()" [disabled]="isPlaying>0" color="success"> Jugar </ion-button>
+
+
+
+    </div>
+    <h3 *ngIf="isPlaying > 0" [style]=" type ? 'color: red;' : '' ">
+      {{(type?"Experto":"Normal")}}
+
+    </h3>
+    <br>
+    <ion-button (click)="endGame()" *ngIf="(isPlaying>0)" color="danger"> Terminar </ion-button>
+
+
+
+
+    <ion-card *ngIf="isPlaying>0">
+      <p>El siguiente numero es multiplo del 7</p>
+
+
+
+
+      <br>
+
+      <h1
+        style="background: blue; color: white; {{styleOfGrid}} border-radius: 10px; padding-top: 20px; padding-bottom: 20px;">
+        {{randomNumber1}}
+      </h1>
+      <span style="color: red">{{timePerRound}}</span>
+      <br>
+
+      <span>{{counter.min}} : {{counter.sec}} <b
+          *ngIf="styleOfGrid == 'background: darkgreen; border-radius: 10px;' && type"
+          style="color: darkgreen;">+5s</b></span>
+      <br>
+      <ion-button (click)="validate(false)" color="danger" *ngIf="randomizer"
+        style="font-size: x-large; color: black !important;" [disabled]="styleOfGrid !=''">
+        No
+      </ion-button>
+      <ion-button (click)="validate(true)" color="success" *ngIf="randomizer" style="font-size: x-large"
+        [disabled]="styleOfGrid !=''">
+        Si</ion-button>
+      <ion-button (click)="validate(true)" color="success" *ngIf="!randomizer" style="font-size: x-large"
+        [disabled]="styleOfGrid !=''">
+        Si</ion-button>
+      <ion-button (click)="validate(false)" color="danger" *ngIf="!randomizer"
+        style="font-size: x-large; color: black !important;" [disabled]="styleOfGrid !=''">No
+      </ion-button>
+      <br><br>
+      <ion-grid>
+        <ion-row>
+          <ion-col style="font-size: xx-large;">
+            <b>Aciertos</b>
+            {{wins}}
+          </ion-col>
+          <ion-col style="font-size: xx-large;">
+            <b>Perdidas</b>
+            {{lost}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <p><b>Tiempo: </b>{{counterAll.min}} : {{counterAll.sec}}</p>
+    </ion-card>
+
+    <ion-card *ngIf="isPlaying==-1">
+      <br>
+      <h3 style="color: white">{{message}}</h3>
+      <br>
+      <p><b>Tiempo de partida: </b>{{timeSaver.min}} : {{timeSaver.sec}}</p>
+      <br>
+      <ion-grid>
+        <ion-row>
+          <ion-col style="font-size: xx-large;">
+            <b>Aciertos</b>
+            {{wins}}
+          </ion-col>
+          <ion-col style="font-size: xx-large;">
+            <b>Perdidas</b>
+            {{lost}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+  </div>
+
+</ion-content>

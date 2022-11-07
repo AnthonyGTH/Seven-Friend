@@ -1,0 +1,7 @@
+{
+  "name": "SevenFriend",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
